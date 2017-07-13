@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#div{
+				width: 100px;
+				height: 100px;
+				background: red;
+				position: absolute;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="div">
+			
+		</div>
+		<script type="text/javascript">
+			function $(id){
+				var div=document.getElementById(id)
+				console.log(div)
+				div.addEventListener('mousedown',function(ev){
+					var divx=ev.clientX-this.getBoundingClientRect().left;
+					var divy=ev.clientY-this.getBoundingClientRect().top;
+					div.addEventListener('mousemove',over)
+					div.addEventListener('mouseup',up)
+					function over(ev){
+						var l=ev.clientX-divx;
+						var t=ev.clientY-divy;
+						div.style.left=l+'px';
+						div.style.top=t+'px';
+					}
+					function up(){
+						div.removeEventListener('mousemove',over)
+						div.removeEventListener('mouseup',up)
+					}
+				})
+			}
+			$('div')
+		</script>
+	</body>
+</html>
